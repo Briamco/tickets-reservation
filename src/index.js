@@ -21,14 +21,18 @@ io.on("connection", (socket) => {
 
 app.use(express.json());
 
-const redis = createClient({
-  username: 'default',
-  password: process.env.REDIS_PASSWORD,
-  socket: {
-    host: process.env.REDIS_HOST || "localhost",
-    port: process.env.REDIS_PORT || 12206
-  }
-});
+const redisConfig = process.env.REDIS_URL
+  ? { url: process.env.REDIS_URL }
+  : {
+      username: process.env.REDIS_USER || "default",
+      password: process.env.REDIS_PASSWORD,
+      socket: {
+        host: process.env.REDIS_HOST || "localhost",
+        port: Number(process.env.REDIS_PORT || 12206)
+      }
+    };
+
+const redis = createClient(redisConfig);
 
 redis.on('error', err => console.log('Redis Client Error', err));
 

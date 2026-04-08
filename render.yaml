@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: redis-example
+    runtime: node
+    plan: free
+    buildCommand: npm ci
+    startCommand: npm start
+    healthCheckPath: /status
+    envVars:
+      - key: NODE_VERSION
+        value: 20
+      - key: REDIS_URL
+        sync: false

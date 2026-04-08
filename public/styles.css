@@ -1,0 +1,218 @@
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;9..144,800&family=Space+Grotesk:wght@400;500;700&display=swap");
+
+:root {
+	--bg-1: #0b1e36;
+	--bg-2: #123d5a;
+	--bg-3: #1f7a8c;
+	--card: rgba(255, 255, 255, 0.14);
+	--card-border: rgba(255, 255, 255, 0.35);
+	--text: #f4fbff;
+	--muted: #d8edf6;
+	--ok: #80ed99;
+	--accent: #ffb703;
+	--accent-2: #fb8500;
+	--danger: #ff4d6d;
+	--shadow: 0 24px 60px rgba(4, 15, 26, 0.45);
+}
+
+* {
+	box-sizing: border-box;
+}
+
+html,
+body {
+	min-height: 100%;
+}
+
+body {
+	margin: 0;
+	font-family: "Space Grotesk", sans-serif;
+	color: var(--text);
+	display: grid;
+  height: 100dvh;
+	place-items: center;
+  align-content: center;
+  text-align: center;
+	padding: 24px;
+	background:
+		radial-gradient(circle at 15% 20%, rgba(255, 183, 3, 0.28), transparent 28%),
+		radial-gradient(circle at 86% 18%, rgba(251, 133, 0, 0.25), transparent 30%),
+		radial-gradient(circle at 50% 100%, rgba(128, 237, 153, 0.18), transparent 34%),
+		linear-gradient(155deg, var(--bg-1), var(--bg-2) 45%, var(--bg-3));
+	overflow-x: hidden;
+}
+
+body::before,
+body::after {
+	content: "";
+	position: fixed;
+	width: 380px;
+	height: 380px;
+	border-radius: 999px;
+	filter: blur(42px);
+	opacity: 0.28;
+	pointer-events: none;
+	z-index: 0;
+	animation: floatOrb 11s ease-in-out infinite alternate;
+}
+
+body::before {
+	background: #ffd166;
+	top: -120px;
+	left: -90px;
+}
+
+body::after {
+	background: #90e0ef;
+	right: -120px;
+	bottom: -120px;
+	animation-delay: 1.5s;
+}
+
+h1,
+h2,
+p,
+button {
+	position: relative;
+	z-index: 1;
+}
+
+h1,
+h2,
+#message,
+#reserveBtn,
+#confirmBtn,
+#cancelBtn {
+	width: min(560px, calc(100vw - 48px));
+}
+
+h1 {
+	margin: 0 0 16px;
+	font-family: "Fraunces", serif;
+	font-weight: 800;
+	font-size: clamp(2rem, 5.8vw, 3.7rem);
+	line-height: 0.95;
+	letter-spacing: 0.02em;
+	text-transform: uppercase;
+	text-wrap: balance;
+	text-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+	animation: revealUp 550ms ease both;
+}
+
+h2 {
+	margin: 0;
+	padding: 14px 18px;
+	border: 1px solid var(--card-border);
+	border-radius: 14px;
+	background: var(--card);
+	backdrop-filter: blur(8px);
+	-webkit-backdrop-filter: blur(8px);
+	font-size: clamp(1.1rem, 3vw, 1.5rem);
+	font-weight: 700;
+	color: var(--ok);
+	box-shadow: var(--shadow);
+	animation: revealUp 650ms ease both;
+}
+
+#message {
+	margin: 18px 0 22px;
+	padding: 12px 14px;
+	border-left: 4px solid var(--accent);
+	border-radius: 10px;
+	font-size: 1rem;
+	color: var(--muted);
+	background: rgba(5, 18, 32, 0.25);
+	animation: revealUp 780ms ease both;
+}
+
+button {
+	margin: 0 0 12px;
+	border: 0;
+	border-radius: 12px;
+	padding: 13px 20px;
+	font-family: "Space Grotesk", sans-serif;
+	font-weight: 700;
+	font-size: 1rem;
+	letter-spacing: 0.01em;
+	cursor: pointer;
+	transition: transform 180ms ease, box-shadow 180ms ease, filter 180ms ease;
+	box-shadow: 0 14px 28px rgba(5, 17, 29, 0.35);
+	animation: revealUp 800ms ease both;
+}
+
+#reserveBtn {
+	background: linear-gradient(120deg, var(--accent), var(--accent-2));
+	color: #151515;
+}
+
+#confirmBtn {
+	background: linear-gradient(120deg, #7bd389, #3bb273);
+	color: #072313;
+}
+
+#cancelBtn {
+	background: linear-gradient(120deg, #ff758f, var(--danger));
+	color: #2f0010;
+}
+
+button:hover {
+	transform: translateY(-2px);
+	filter: saturate(1.05);
+	box-shadow: 0 18px 36px rgba(5, 17, 29, 0.45);
+}
+
+button:active {
+	transform: translateY(1px) scale(0.995);
+}
+
+button:focus-visible {
+	outline: 3px solid rgba(255, 255, 255, 0.85);
+	outline-offset: 3px;
+}
+
+button[hidden] {
+	display: none;
+}
+
+@keyframes revealUp {
+	from {
+		opacity: 0;
+		transform: translateY(16px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes floatOrb {
+	from {
+		transform: translateY(0) translateX(0) scale(1);
+	}
+	to {
+		transform: translateY(-24px) translateX(16px) scale(1.08);
+	}
+}
+
+@media (max-width: 640px) {
+	body {
+		padding: 18px;
+	}
+
+	h1,
+	h2,
+	#message,
+	#reserveBtn,
+	#confirmBtn,
+	#cancelBtn {
+		width: min(560px, calc(100vw - 36px));
+	}
+
+	h1 {
+		margin-bottom: 12px;
+	}
+
+	#message {
+		margin: 14px 0 18px;
+	}
+}
